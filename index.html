@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00C3FF">
   <title>z_as's Profile</title>
-  <meta property="og:title" content="z_as">
+  <meta property="og:title" content="z's profile">
   <meta property="og:description" content="dont dm me for random stuff
 bleh bleh blu bleh
 taken &lt;3">
@@ -15,7 +16,7 @@ taken &lt;3">
   <meta property="og:url" content="https://kdga-ui.github.io/">
   <meta property="og:type" content="profile">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="z_as">
+  <meta name="twitter:title" content="z's profile">
   <meta name="twitter:description" content="dont dm me for random stuff
 bleh bleh blu bleh
 taken &lt;3">
@@ -259,17 +260,6 @@ taken &lt;3">
       z-index: 100; top: -35px; left: 50%; margin-left: -60px; opacity: 0; transition: opacity 0.3s;
     }
     .visitor-counter:hover .tooltip { visibility: visible; opacity: 1 !important; }
-
-    .name-tooltip-wrap { position: relative; display: inline-block; }
-    .name-tooltip {
-      visibility: hidden; opacity: 0; position: absolute; bottom: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; font-size: 12px;
-      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; padding: 6px 10px;
-      border-radius: 6px; white-space: nowrap; z-index: 100; pointer-events: none;
-      transition: opacity 0.2s; text-align: center; line-height: 1.4;
-    }
-    .name-tooltip .name-tooltip-uuid, .name-tooltip .name-tooltip-joined { display: block; }
-    .name-tooltip-wrap:hover .name-tooltip { visibility: visible; opacity: 1; }
 
     /* ============================================================
        DISCORD PRESENCE | inline in profile card
@@ -560,13 +550,7 @@ taken &lt;3">
         </div>
         <div class="profile-info">
           <div class="name-and-badges">
-            <div class="name-tooltip-wrap">
-              <div id="profile-name"></div>
-              <span class="name-tooltip">
-                <span class="name-tooltip-uuid">UUID: 41</span>
-                <span class="name-tooltip-joined" data-created="2026-08-05T01:33:59.73283+00:00">Joined just now</span>
-              </span>
-            </div>
+            <div id="profile-name"></div>
             
           </div>
           
@@ -752,30 +736,6 @@ taken &lt;3">
       if (vid && vid.tagName === 'VIDEO') vid.pause();
     }
 
-    function formatJoinedAgo(iso) {
-      if (!iso) return 'Joined just now';
-      const then = new Date(iso).getTime();
-      if (isNaN(then)) return 'Joined just now';
-      const diff = Math.max(0, Date.now() - then) / 1000;
-      if (diff < 5)    return 'Joined just now';
-      if (diff < 60)   return 'Joined ' + Math.floor(diff) + ' seconds ago';
-      if (diff < 120)  return 'Joined about a minute ago';
-      if (diff < 3600) return 'Joined ' + Math.floor(diff/60) + ' minutes ago';
-      if (diff < 7200) return 'Joined about an hour ago';
-      if (diff < 86400)   return 'Joined ' + Math.floor(diff/3600) + ' hours ago';
-      if (diff < 172800)  return 'Joined about a day ago';
-      if (diff < 2592000) return 'Joined ' + Math.floor(diff/86400) + ' days ago';
-      if (diff < 5184000) return 'Joined about a month ago';
-      if (diff < 31536000)return 'Joined ' + Math.floor(diff/2592000) + ' months ago';
-      if (diff < 63072000)return 'Joined about a year ago';
-      return 'Joined about ' + Math.floor(diff/31536000) + ' years ago';
-    }
-    function refreshJoinedAgo() {
-      document.querySelectorAll('.name-tooltip-joined').forEach(el => {
-        el.textContent = formatJoinedAgo(el.getAttribute('data-created'));
-      });
-    }
-
     // =====================================================
     // DISCORD PRESENCE | inline card
     // =====================================================
@@ -889,8 +849,6 @@ taken &lt;3">
       const startScreen      = document.getElementById('start-screen');
       const startText        = document.getElementById('start-text');
       const profileName      = document.getElementById('profile-name');
-      refreshJoinedAgo();
-      setInterval(refreshJoinedAgo, 30000);
       const profileBio       = document.getElementById('profile-bio');
       const backgroundMusic  = document.getElementById('background-music');
       const profileBlock     = document.getElementById('profile-block');
